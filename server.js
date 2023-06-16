@@ -38,7 +38,10 @@ const getSpeciesData = async (req, res) => {
       if (result.length === 0) {
         throw "API returned an empty array";
       }
-      await redisClient.set(species, JSON.stringify(result));
+      await redisClient.set(species, JSON.stringify(result), {
+        EX: 180,
+        NX: true,
+      });
     }
     res.send({
       fromCache: isCached,
