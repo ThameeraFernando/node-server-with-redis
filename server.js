@@ -5,6 +5,7 @@ const redis = require("redis");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// create a redis client
 let redisClient;
 (async () => {
   redisClient = redis.createClient();
@@ -14,7 +15,7 @@ let redisClient;
   await redisClient.connect();
 })();
 
-// fetch data from api
+// fetch data from an api
 const fetchApiData = async (species) => {
   const apiResponse = await axios.get(
     `https://www.fishwatch.gov/api/species/${species}`
